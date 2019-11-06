@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const async = require('async');
-
+const CONTACTS_COLLECTION = "contacts";
 
 router.get("/api/contacts", async function(req, res) {
     const db = req.app.db;
