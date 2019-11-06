@@ -6,7 +6,7 @@ const ObjectID = mongodb.ObjectID;
 
 const CONTACTS_COLLECTION = "contacts";
 
-router.get("/api/contacts", async function(req, res) {
+router.get("/api/contacts", async function(req, res, next) {
     const db = req.app.db;
     db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
       if (err) {
@@ -18,7 +18,7 @@ router.get("/api/contacts", async function(req, res) {
   });
 
 
-  router.post("/api/contacts", async function(req, res) {
+  router.post("/api/contacts", async function(req, res, next) {
     var newContact = req.body;
     newContact.createDate = new Date();
     const db = req.app.db;
@@ -36,7 +36,7 @@ router.get("/api/contacts", async function(req, res) {
   });
   
   
-  router.get("/api/contacts/:id", async function(req, res) {
+  router.get("/api/contacts/:id", async function(req, res, next) {
     const db = req.app.db;
       db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
         if (err) {
@@ -47,7 +47,7 @@ router.get("/api/contacts", async function(req, res) {
       });
     });
     
-    router.put("/api/contacts/:id", async function(req, res) {
+    router.put("/api/contacts/:id", async function(req, res, next) {
         const db = req.app.db;
       var updateDoc = req.body;
       delete updateDoc._id;
@@ -62,7 +62,7 @@ router.get("/api/contacts", async function(req, res) {
       });
     });
     
-    router.delete("/api/contacts/:id", async function(req, res) {
+    router.delete("/api/contacts/:id", async function(req, res, next) {
         const db = req.app.db;
       db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
         if (err) {
