@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const async = require('async');
+const mongodb = require("mongodb");
 const ObjectID = mongodb.ObjectID;
 
 const CONTACTS_COLLECTION = "contacts";
