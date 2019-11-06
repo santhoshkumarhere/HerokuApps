@@ -88,7 +88,7 @@ app.post("/api/contacts", function(req, res) {
     var updateDoc = req.body;
     delete updateDoc._id;
   
-    db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, { upsert: true }, updateDoc, function(err, doc) {
+    db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: updateDoc}, function(err, doc) {
       if (err) {
         handleError(res, err.message, "Failed to update contact");
       } else {
