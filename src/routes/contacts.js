@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const async = require('async');
+const ObjectID = mongodb.ObjectID;
+
 const CONTACTS_COLLECTION = "contacts";
 
 router.get("/api/contacts", async function(req, res) {
