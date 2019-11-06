@@ -51,8 +51,9 @@ router.get("/api/contacts", async function(req, res, next) {
         const db = req.app.db;
       var updateDoc = req.body;
       delete updateDoc._id;
-     console.log(updateDoc);
-      db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {set: updateDoc}, function(err, doc) {
+      var newValues = {$set: updateDoc}
+     console.log(newValues);
+      db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, newValues, function(err, doc) {
         if (err) {
             next(err);
         } else {
