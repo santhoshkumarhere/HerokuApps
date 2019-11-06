@@ -13,6 +13,12 @@ app.use(bodyParser.json());
 var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
+// require the routes
+const index = require('./src/routes/contacts');
+
+// setup the routes
+app.use('/', index);
+
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
 
@@ -26,7 +32,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
     // Save database object from the callback for reuse.
     db = client.db();
     console.log("Database connection ready");
-  
+    app.db = db;
     // Initialize the app.
       const server = app.listen(process.env.PORT || 8080, () => {
       const port = server.address().port;
@@ -40,15 +46,15 @@ function handleError(res, reason, message, code) {
     res.status(code || 500).json({"error": message});
 }
 
-app.get("/api/contacts", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get contacts.");
-    } else {
-      res.status(200).json(docs);
-    }
-  });
-});
+// app.get("/api/contacts", function(req, res) {
+//   db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+//     if (err) {
+//       handleError(res, err.message, "Failed to get contacts.");
+//     } else {
+//       res.status(200).json(docs);
+//     }
+//   });
+// });
 
 app.post("/api/contacts", function(req, res) {
   var newContact = req.body;
