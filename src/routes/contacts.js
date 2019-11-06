@@ -22,6 +22,7 @@ router.get("/api/contacts", function(req, res, next) {
     var newContact = req.body;
     newContact.createDate = new Date();
     const db = req.app.db;
+    console.log(newContact);
     if (!req.body.name) {
         next(err);
     } else {
