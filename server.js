@@ -14,10 +14,10 @@ var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 // require the routes
-const index = require('./src/routes/contacts');
+const contacts = require('./src/routes/contacts');
 
 // setup the routes
-app.use('/', index);
+app.use('/', contacts);
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
@@ -108,3 +108,4 @@ app.post("/api/contacts", function(req, res) {
     });
   });
 
+  

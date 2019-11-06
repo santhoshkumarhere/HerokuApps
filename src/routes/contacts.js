@@ -1,6 +1,6 @@
 const express = require('express');
-const async = require('async');
 const router = express.Router();
+const async = require('async');
 
 
 router.get("/api/contacts", async function(req, res) {
@@ -18,3 +18,5 @@ router.get("/api/contacts", async function(req, res) {
     console.log("ERROR from contacts.js: " + reason);
     res.status(code || 500).json({"error": message});
 }
+
+module.exports = router;
