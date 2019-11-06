@@ -52,7 +52,7 @@ router.get("/api/contacts", async function(req, res) {
       var updateDoc = req.body;
       delete updateDoc._id;
     
-      db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: updateDoc}, function(err, doc) {
+      db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
         if (err) {
             next(err);
         } else {
